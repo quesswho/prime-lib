@@ -45,10 +45,6 @@ void prime_sieve(uint8_t *sieve, uint64_t *primes, uint64_t *num_primes, uint64_
     prime_sieve(sieve, primes, num_primes, sqrt_n);
     // Now we have primes and a sieve up to sqrt(n)
 
-    for (uint64_t i = 0; i < (*num_primes); i++) {
-        printf("%llu ", primes[i]);
-    }
-
     // Fill the rest of the sieve in segments
     for (uint64_t segment_start = sqrt_n + 1; segment_start <= n; segment_start+=SEG_SIZE) {
         uint64_t segment_end = prime_min(segment_start + SEG_SIZE - 1, n);
@@ -101,10 +97,10 @@ uint64_t prime_count(uint64_t n) {
                 segment_sieve[j - segment_start] = 1;
             }
         }
-        for (uint64_t i = segment_start; i <= segment_end; i++) {
-            if (!segment_sieve[i - segment_start]) {
-                num_primes++;
-            }
+        
+        uint64_t seg_len = segment_end - segment_start + 1;
+        for (uint64_t k = 0; k < seg_len; k++) {
+            if (!segment_sieve[k]) num_primes++;
         }
     }
 
