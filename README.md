@@ -1,6 +1,6 @@
-# prime
+# prime-lib
 
-A fast segmented sieve of Eratosthenes in C.
+A fast segmented prime sieve written in C.
 
 ## Features
 
